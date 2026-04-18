@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Messaoud TechNova — خدمات تقنية احترافية في جميع ولايات الجزائر: إصلاح حواسيب، تثبيت أنظمة، تصميم مواقع، حماية من الفيروسات."/>
+<meta name="keywords" content="تصميم مواقع الجزائر، إصلاح حواسيب سوق أهراس، تثبيت ويندوز، Messaoud TechNova"/>
+<meta property="og:title" content="Messaoud TechNova | حلول رقمية احترافية"/>
+<meta property="og:description" content="خدمات تقنية احترافية في الجزائر بأسعار في متناول الجميع"/>
+<meta property="og:type" content="website"/>
+<meta name="theme-color" content="#0a1628"/>
+<title>Messaoud TechNova | حلول رقمية احترافية</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+
+<style>
+/* ══════════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════════ */
+:root{
+  --ink:#0a1628; --ink2:#0e1f38; --ink3:#132540;
+  --glass:#1a2f4a; --glass2:#1e3654;
+  --teal:#2dd4bf; --teal-d:#14b8a4; --teal-hi:#5eead4;
+  --gold:#f59e0b; --gold-hi:#fbbf24; --gold-d:#d97706;
+  --coral:#fb7185; --green:#34d399; --green-d:#059669;
+  --txt:#e2eaf5; --mut:#7a9ab8; --dim:#4a6278; --w:#ffffff;
+  --bdr:rgba(45,212,191,.12); --bdrh:rgba(45,212,191,.35);
+  --bdr-gold:rgba(245,158,11,.25);
+  --fb:'Tajawal','Cairo',sans-serif;
+  --r2:4px; --r4:8px; --r6:12px; --r8:16px; --r12:24px;
+  --glow-t:0 0 32px rgba(45,212,191,.22);
+  --glow-g:0 0 32px rgba(245,158,11,.22);
+  --sh:0 8px 48px rgba(0,0,0,.6);
+  --sh-sm:0 4px 16px rgba(0,0,0,.4);
+  --ease:cubic-bezier(.4,0,.2,1); --t:.26s var(--ease);
+}
+
+/* ═══════ RESET ═══════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--fb);background:var(--ink);color:var(--txt);line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px}
+::selection{background:rgba(45,212,191,.25)}
+
+/* ════════════════════════════════════════
+   FOCUS VISIBLE — Accessibility fix
+   Shows outline only for keyboard users
+════════════════════════════════════════ */
+:focus{outline:none}
+:focus-visible{
+  outline:2px solid var(--teal);
+  outline-offset:3px;
+  border-radius:var(--r2);
+}
+
+/* ═══════════════════════════════════════
+   CRITICAL FIX: Bidirectional text handling
+   Prices and phone numbers must display LTR
+   inside an RTL document
+═══════════════════════════════════════ */
+
+/* Any element with this class is forced LTR
+   and isolated from surrounding RTL context */
+.ltr{
+  direction:ltr;
+  unicode-bidi:isolate;
+  display:inline-block;
+  text-align:left;
+}
+
+/* Phone numbers specifically */
+.phone-num{
+  direction:ltr;
+  unicode-bidi:isolate;
+  display:inline-flex;
+  align-items:center;
+  gap:.25rem;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.03em;
+}
+.phone-num:hover{color:var(--teal)}
+
+/* Price amounts: force LTR so "1 000 دج" doesn't
+   become "جد 000 1" in some renderers */
+.price-num{
+  direction:ltr;
+  unicode-bidi:isolate;
+  display:inline-block;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ═══════ LAYOUT ═══════ */
+.container{max-width:1140px;margin-inline:auto;padding-inline:1.5rem}
+
+/* ═══════ BACKGROUND ═══════ */
+.bg-layer{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background:var(--ink)}
+.bg-pattern{
+  position:absolute;inset:0;opacity:.04;
+  background-image:
+    linear-gradient(30deg,var(--teal) 1px,transparent 1px),
+    linear-gradient(150deg,var(--teal) 1px,transparent 1px),
+    linear-gradient(90deg,var(--gold) .5px,transparent .5px);
+  background-size:60px 60px,60px 60px,120px 120px;
+}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.orb-1{width:800px;height:800px;top:-30%;right:-20%;background:radial-gradient(circle,rgba(45,212,191,.18),transparent 65%);animation:drift 20s ease-in-out infinite alternate}
+.orb-2{width:600px;height:600px;bottom:-10%;left:-15%;background:radial-gradient(circle,rgba(245,158,11,.14),transparent 65%);animation:drift 25s ease-in-out infinite alternate-reverse}
+.orb-3{width:400px;height:400px;top:40%;left:35%;background:radial-gradient(circle,rgba(45,212,191,.08),transparent 65%);animation:drift 32s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(40px,50px)}}
+
+/* ═══════ UTILITIES ═══════ */
+.chip{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:.32rem 1rem;border-radius:999px;
+  background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.3);color:var(--teal);
+  margin-bottom:1.1rem;
+}
+.section-title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:900;color:var(--w);text-align:center;margin-bottom:.6rem;line-height:1.2}
+.section-sub{color:var(--mut);text-align:center;font-size:1rem;margin-bottom:3rem}
+.grad-text{background:linear-gradient(110deg,var(--teal) 0%,var(--gold) 55%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ═══════ BUTTONS ═══════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  padding:.65rem 1.5rem;border-radius:var(--r4);
+  font-family:var(--fb);font-weight:700;font-size:.92rem;
+  border:none;cursor:pointer;transition:var(--t);white-space:nowrap;
+}
+.btn-teal{background:linear-gradient(135deg,var(--teal),var(--teal-d));color:var(--ink);box-shadow:var(--glow-t)}
+.btn-teal:hover{transform:translateY(-3px);filter:brightness(1.1);box-shadow:0 0 48px rgba(45,212,191,.4)}
+.btn-gold{background:linear-gradient(135deg,var(--gold-hi),var(--gold-d));color:var(--ink);box-shadow:var(--glow-g)}
+.btn-gold:hover{transform:translateY(-3px);filter:brightness(1.08)}
+.btn-wa{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff}
+.btn-wa:hover{transform:translateY(-3px);filter:brightness(1.08)}
+.btn-outline{background:transparent;border:1.5px solid var(--bdrh);color:var(--teal)}
+.btn-outline:hover{background:rgba(45,212,191,.1);transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--txt)}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn-lg{padding:.9rem 2.4rem;font-size:1.05rem;border-radius:var(--r6)}
+.btn-block{width:100%}
+
+/* ═══════ HEADER ═══════ */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.88);backdrop-filter:blur(28px) saturate(1.5);border-bottom:1px solid var(--bdr)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding-block:.9rem;gap:1rem}
+.nav-brand{display:flex;align-items:center;gap:.7rem;font-size:1.12rem;font-weight:900;color:var(--w);letter-spacing:.02em}
+.brand-mark{width:40px;height:40px;border-radius:var(--r4);background:linear-gradient(135deg,var(--teal),var(--teal-d));display:grid;place-items:center;font-size:1.15rem;box-shadow:var(--glow-t);flex-shrink:0}
+.brand-accent{color:var(--teal)}
+.nav-links{display:flex;align-items:center;gap:1.8rem;font-size:.9rem;font-weight:500}
+.nav-links a{color:var(--mut);transition:color var(--t);position:relative;padding-bottom:3px}
+.nav-links a::after{content:'';position:absolute;bottom:0;right:0;width:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width var(--t);border-radius:1px}
+.nav-links a:hover,.nav-links a.active{color:var(--w)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:.4rem}
+.ham span{display:block;width:23px;height:2px;background:var(--txt);border-radius:2px;transition:var(--t)}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ═══════ HERO ═══════ */
+.hero{min-height:94vh;display:flex;align-items:center;padding-block:5rem 3rem;position:relative}
+.hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(170deg,rgba(45,212,191,.04) 0%,transparent 50%)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:4rem;align-items:center}
+.hero-eyebrow{margin-bottom:1.3rem}
+.hero-title{font-size:clamp(2.2rem,5.5vw,3.9rem);font-weight:900;line-height:1.13;color:var(--w);margin-bottom:1.3rem}
+.hero-desc{color:var(--mut);font-size:1.05rem;margin-bottom:2.5rem;max-width:520px;line-height:1.9}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-text{animation:slideUp .85s var(--ease) both}
+.hero-visual{animation:slideUp .85s var(--ease) both .18s}
+@keyframes slideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+
+/* Service preview cards */
+.srv-previews{display:flex;flex-direction:column;gap:1rem}
+.srv-preview{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r8);padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1rem;box-shadow:var(--sh-sm);transition:var(--t)}
+.srv-preview:hover{transform:translateX(-8px);border-color:var(--bdrh);box-shadow:var(--glow-t)}
+.srv-preview-ico{width:50px;height:50px;border-radius:var(--r4);display:grid;place-items:center;font-size:1.5rem;flex-shrink:0}
+.ico-t{background:rgba(45,212,191,.15);border:1px solid rgba(45,212,191,.2)}
+.ico-g{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.2)}
+.ico-c{background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.2)}
+.ico-r{background:rgba(251,113,133,.15);border:1px solid rgba(251,113,133,.2)}
+.srv-preview-name{font-weight:700;color:var(--w);font-size:.92rem}
+
+/* ════════════════════════════════════
+   FIXED: price display in hero cards
+   Wrapping with correct bidi isolation
+════════════════════════════════════ */
+.srv-preview-price{font-size:.82rem;color:var(--mut);margin-top:.15rem}
+.srv-preview-price .amt{color:var(--gold);font-weight:700}
+
+/* Trust strip */
+.trust-strip{background:var(--glass);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding-block:1.7rem}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center}
+.trust-num{font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--teal),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.trust-lbl{font-size:.8rem;color:var(--mut);margin-top:.3rem}
+
+/* ═══════ SERVICES ═══════ */
+.services{padding-block:6rem}
+.srv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.srv-card{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r8);padding:2rem;position:relative;overflow:hidden;transition:transform var(--t),box-shadow var(--t),border-color var(--t)}
+.srv-card::before{content:'';position:absolute;top:0;left:0;width:60px;height:60px;background:linear-gradient(135deg,rgba(45,212,191,.15),transparent);clip-path:polygon(0 0,100% 0,0 100%);transition:opacity var(--t);opacity:0}
+.srv-card:hover{transform:translateY(-8px);box-shadow:var(--glow-t);border-color:var(--bdrh)}
+.srv-card:hover::before{opacity:1}
+.srv-ico{width:60px;height:60px;border-radius:var(--r4);background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.22);display:grid;place-items:center;font-size:1.8rem;margin-bottom:1.3rem}
+.srv-name{font-size:1.15rem;font-weight:800;color:var(--w);margin-bottom:.5rem}
+.srv-desc{color:var(--mut);font-size:.9rem;margin-bottom:1.3rem;line-height:1.75}
+
+/* ════════════════════════════════════
+   FIXED: price pill — proper bidi order
+   Icon · Arabic text · LTR number · unit
+════════════════════════════════════ */
+.price-pill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(245,158,11,.1);border:1px solid var(--bdr-gold);
+  color:var(--gold);font-weight:700;font-size:.84rem;
+  padding:.35rem 1rem;border-radius:999px;
+  flex-wrap:nowrap;
+}
+.price-pill .p-icon{flex-shrink:0}
+.price-pill .p-label{color:var(--gold);font-size:.84rem} /* Arabic part */
+.price-pill .p-val{
+  color:var(--gold-hi);font-weight:800;font-size:.9rem;
+  /* Force this span LTR so "1 500–4 000" renders correctly */
+  direction:ltr;unicode-bidi:isolate;
+  display:inline-block;
+  font-variant-numeric:tabular-nums;
+}
+.price-pill .p-unit{color:var(--mut);font-size:.8rem;font-weight:500}
+
+/* ════════════════════════════════════
+   FIXED: RTL-correct arrow for service links
+   In RTL, "previous" means → not ←
+════════════════════════════════════ */
+.srv-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  color:var(--teal);font-weight:600;font-size:.88rem;
+  margin-top:1rem;background:none;border:none;padding:0;
+  transition:gap var(--t);cursor:pointer;
+}
+.srv-link .arr{
+  display:inline-block;
+  transition:transform var(--t);
+}
+.srv-link:hover{gap:.7rem}
+.srv-link:hover .arr{transform:translateX(-4px)} /* RTL: move right visually = translateX(-) */
+
+/* ═══════════════════════════════════════
+   PRICING SECTION — Complete redesign
+   Uses a table-like layout for clarity
+═══════════════════════════════════════ */
+.pricing{padding-block:6rem;background:var(--ink2)}
+
+/* ── Pricing Table (replaces card grid) ── */
+.price-table-wrap{
+  background:var(--glass);border:1px solid var(--bdr);
+  border-radius:var(--r8);overflow:hidden;
+  margin-bottom:1.5rem;
+}
+.price-table{width:100%;border-collapse:collapse}
+.price-table thead{background:rgba(45,212,191,.08)}
+.price-table thead th{
+  padding:1rem 1.25rem;
+  font-size:.78rem;font-weight:700;
+  color:var(--teal);letter-spacing:.1em;text-transform:uppercase;
+  border-bottom:1px solid var(--bdr);
+  text-align:right;
+}
+/* Unit price column should be LTR-aligned */
+.price-table thead th.th-price{text-align:center}
+.price-table thead th.th-note{text-align:center}
+
+.price-table tbody tr{
+  border-bottom:1px solid var(--bdr);
+  transition:background var(--t);
+}
+.price-table tbody tr:last-child{border-bottom:none}
+.price-table tbody tr:hover{background:rgba(45,212,191,.04)}
+
+.price-table td{
+  padding:1.1rem 1.25rem;
+  vertical-align:middle;
+  font-size:.92rem;
+  color:var(--txt);
+}
+
+/* Service column */
+.td-svc{
+  display:flex;align-items:center;gap:.85rem;
+}
+.td-ico{
+  width:40px;height:40px;border-radius:var(--r4);
+  background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.18);
+  display:grid;place-items:center;font-size:1.2rem;flex-shrink:0;
+}
+.td-name{font-weight:700;color:var(--w);font-size:.93rem;display:block}
+.td-sub{font-size:.78rem;color:var(--mut);margin-top:.1rem;display:block}
+
+/* ════════════════════════════════════
+   FIXED: Price amount cell
+   The numeric value is wrapped in a
+   <span class="price-num ltr"> to ensure
+   correct left-to-right rendering of
+   mixed-direction numeric strings like
+   "1 500 – 4 000 دج"
+════════════════════════════════════ */
+.td-price{
+  text-align:center;
+  white-space:nowrap;
+}
+.td-price .amount{
+  font-size:1.05rem;font-weight:900;
+  color:var(--teal);
+  display:block;
+  /* Wrap value in bidi isolation */
+  direction:ltr;unicode-bidi:isolate;
+  font-variant-numeric:tabular-nums;
+}
+.td-price .unit{
+  font-size:.75rem;color:var(--mut);
+  font-weight:400;margin-top:.15rem;
+  display:block;
+}
+.td-price .free-badge{
+  display:inline-flex;align-items:center;gap:.3rem;
+  background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3);
+  color:var(--green);font-weight:800;font-size:.8rem;
+  padding:.3rem .8rem;border-radius:999px;
+}
+
+/* Note column */
+.td-note{
+  text-align:center;
+  font-size:.8rem;color:var(--mut);
+  max-width:180px;
+}
+
+/* CTA column */
+.td-cta{text-align:center}
+.td-order-btn{
+  background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.25);
+  color:var(--teal);font-weight:700;font-size:.8rem;
+  padding:.4rem .9rem;border-radius:999px;
+  cursor:pointer;transition:var(--t);white-space:nowrap;
+}
+.td-order-btn:hover{background:rgba(45,212,191,.2);border-color:var(--teal)}
+
+/* Mobile: collapse table to cards on small screens */
+@media(max-width:720px){
+  .price-table-wrap{overflow-x:auto}
+  .price-table{min-width:560px}
+}
+
+/* Featured row (website design) */
+.price-table tr.featured-row{background:rgba(45,212,191,.06)}
+.price-table tr.featured-row .amount{color:var(--gold-hi)}
+
+/* Pricing note */
+.pricing-note{
+  padding:1.2rem 1.5rem;
+  background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.18);
+  border-radius:var(--r6);
+  display:flex;align-items:flex-start;gap:.8rem;font-size:.88rem;color:var(--mut);
+}
+.pricing-note .pn-ico{font-size:1.2rem;flex-shrink:0;margin-top:.05rem}
+.pricing-note strong{color:var(--txt)}
+
+/* ═══════ WHY US ═══════ */
+.why{padding-block:6rem}
+.why-layout{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.why-feats{display:flex;flex-direction:column;gap:1.2rem}
+.feat{display:flex;gap:1rem;align-items:flex-start;background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r8);padding:1.3rem 1.4rem;transition:var(--t)}
+.feat:hover{border-color:var(--bdrh);transform:translateX(-5px);box-shadow:var(--sh-sm)}
+.feat-ico{width:48px;height:48px;border-radius:var(--r4);background:rgba(45,212,191,.12);display:grid;place-items:center;font-size:1.4rem;flex-shrink:0}
+.feat-h{font-weight:800;color:var(--w);margin-bottom:.25rem;font-size:.97rem}
+.feat-p{font-size:.88rem;color:var(--mut);line-height:1.7}
+.callout-box{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r12);padding:2.5rem 2rem;text-align:center;box-shadow:var(--sh);position:sticky;top:90px}
+.callout-geo{width:80px;height:80px;margin:0 auto 1.5rem;position:relative;display:grid;place-items:center}
+.callout-geo::before,.callout-geo::after{content:'';position:absolute;inset:0;border-radius:var(--r4);background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.25)}
+.callout-geo::before{transform:rotate(0deg)}
+.callout-geo::after{transform:rotate(45deg);opacity:.6}
+.callout-geo-ico{position:relative;z-index:1;font-size:2.2rem}
+.callout-h{font-size:1.3rem;font-weight:800;color:var(--w);margin-bottom:.7rem}
+.callout-p{color:var(--mut);font-size:.9rem;line-height:1.85;margin-bottom:1.8rem}
+.free-btn{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;font-weight:800;font-size:.95rem;padding:.75rem 1.8rem;border-radius:var(--r6);box-shadow:0 0 28px rgba(52,211,153,.3);transition:var(--t)}
+.free-btn:hover{transform:translateY(-3px);filter:brightness(1.08)}
+
+/* ════════════════════════════════════
+   CONTACT SECTION — Enhanced
+════════════════════════════════════ */
+.contact-sec{padding-block:6rem;background:var(--ink3)}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact-info-box{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r8);padding:2rem}
+.contact-info-box h3{font-size:1.15rem;font-weight:800;color:var(--w);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid var(--bdr)}
+.c-row{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1.25rem}
+.c-ico{width:44px;height:44px;border-radius:var(--r4);background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.2);display:grid;place-items:center;font-size:1.1rem;flex-shrink:0}
+.c-label{font-size:.72rem;color:var(--teal);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.3rem}
+.c-val{font-size:.95rem;color:var(--txt);font-weight:500}
+.c-val a{color:var(--txt);transition:color var(--t)}
+.c-val a:hover{color:var(--teal)}
+
+/* ════════════════════════════════════
+   FIXED: Phone number display
+   Full international format with proper
+   bidi isolation and tabular numerals
+════════════════════════════════════ */
+.phone-display{
+  display:flex;align-items:center;gap:.5rem;
+  flex-wrap:wrap;
+}
+.phone-display a{
+  direction:ltr;
+  unicode-bidi:isolate;
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  font-size:.97rem;
+  font-weight:600;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.02em;
+  color:var(--txt);
+  transition:color var(--t);
+}
+.phone-display a:hover{color:var(--teal)}
+.phone-badge{
+  font-size:.68rem;font-weight:700;
+  padding:.15rem .5rem;border-radius:999px;
+  letter-spacing:.04em;
+}
+.badge-wa{background:rgba(37,211,102,.15);color:var(--green);border:1px solid rgba(37,211,102,.25)}
+.badge-mobile{background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.25)}
+
+/* Phone copy button */
+.phone-copy-btn{
+  background:none;border:none;
+  color:var(--dim);font-size:.85rem;
+  cursor:pointer;padding:.15rem .4rem;
+  border-radius:var(--r2);transition:color var(--t),background var(--t);
+}
+.phone-copy-btn:hover{color:var(--teal);background:rgba(45,212,191,.1)}
+.phone-copy-btn.copied{color:var(--green)}
+
+.wa-row{margin-top:1.5rem;padding:1rem;border-radius:var(--r6);background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);display:flex;align-items:center;gap:.75rem}
+.wa-row-text{font-size:.88rem;color:var(--mut);flex:1}
+.wa-row-text strong{color:var(--green);display:block;margin-bottom:.15rem;direction:ltr;unicode-bidi:isolate}
+
+.map-placeholder{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r8);padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:280px;text-align:center}
+.map-ico{font-size:3.5rem;margin-bottom:1rem;opacity:.7}
+.map-placeholder h3{color:var(--w);font-weight:700;margin-bottom:.5rem}
+.map-placeholder p{color:var(--mut);font-size:.9rem;margin-bottom:1.5rem}
+
+/* ═══════ CTA BAND ═══════ */
+.cta-band{padding-block:5rem;background:linear-gradient(130deg,rgba(45,212,191,.1) 0%,rgba(245,158,11,.07) 100%);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);text-align:center}
+.cta-band h2{font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:900;color:var(--w);margin-bottom:.75rem}
+.cta-band p{color:var(--mut);margin-bottom:2.2rem;font-size:1.02rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ═══════ FOOTER ═══════ */
+.site-footer{background:var(--ink2);border-top:1px solid var(--bdr);padding-block:4rem 1.8rem}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand p{color:var(--mut);font-size:.88rem;line-height:1.85;margin-top:.9rem}
+.footer-h{font-weight:700;color:var(--w);margin-bottom:1rem;font-size:.9rem;letter-spacing:.04em}
+.footer-links{display:flex;flex-direction:column;gap:.6rem}
+.footer-links a{color:var(--mut);font-size:.88rem;transition:color var(--t)}
+.footer-links a:hover{color:var(--teal)}
+.footer-cr{display:flex;align-items:flex-start;gap:.65rem;color:var(--mut);font-size:.88rem;margin-bottom:.8rem}
+.footer-cr-ico{color:var(--teal);flex-shrink:0;margin-top:.15rem}
+.footer-cr a{color:var(--mut);transition:color var(--t)}
+.footer-cr a:hover{color:var(--teal)}
+/* Footer phone numbers — same bidi fix */
+.footer-phone{direction:ltr;unicode-bidi:isolate;display:inline-block;font-variant-numeric:tabular-nums}
+.footer-bottom{border-top:1px solid var(--bdr);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--dim)}
+.footer-bottom a{color:var(--teal)}
+
+/* ══════════════════════════════
+   BACK TO TOP BUTTON
+══════════════════════════════ */
+.back-top{
+  position:fixed;bottom:6rem;left:2rem;z-index:190;
+  width:42px;height:42px;border-radius:50%;
+  background:var(--glass);border:1px solid var(--bdrh);
+  color:var(--teal);font-size:1.1rem;
+  display:grid;place-items:center;
+  box-shadow:var(--sh-sm);cursor:pointer;
+  opacity:0;visibility:hidden;
+  transition:opacity .3s var(--ease),visibility .3s var(--ease),transform var(--t);
+}
+.back-top.show{opacity:1;visibility:visible}
+.back-top:hover{transform:translateY(-3px);background:rgba(45,212,191,.15)}
+
+/* ═══════ WhatsApp FAB ═══════ */
+.wa-fab{position:fixed;bottom:2rem;left:2rem;z-index:200;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:grid;place-items:center;box-shadow:0 6px 32px rgba(37,211,102,.5);animation:waPulse 3s ease-in-out infinite;transition:transform var(--t)}
+.wa-fab:hover{transform:scale(1.12)}
+@keyframes waPulse{0%,100%{box-shadow:0 6px 32px rgba(37,211,102,.5)}50%{box-shadow:0 6px 48px rgba(37,211,102,.75)}}
+
+/* ══════════════════════════════
+   TOAST NOTIFICATION
+══════════════════════════════ */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;z-index:600;
+  background:var(--glass2);border:1px solid var(--bdrh);
+  color:var(--teal);font-size:.88rem;font-weight:600;
+  padding:.65rem 1.25rem;border-radius:var(--r6);
+  box-shadow:var(--sh-sm);
+  display:flex;align-items:center;gap:.5rem;
+  transform:translateY(80px);opacity:0;
+  transition:transform .35s var(--ease),opacity .35s var(--ease);
+  pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ═══════ ORDER MODAL ═══════ */
+.overlay{position:fixed;inset:0;z-index:500;background:rgba(5,12,22,.88);backdrop-filter:blur(10px) saturate(1.2);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s var(--ease)}
+.overlay.open{opacity:1;visibility:visible}
+.overlay.open .modal{transform:translateY(0) scale(1);opacity:1}
+.modal{background:var(--ink2);border:1px solid var(--bdrh);border-radius:var(--r12);width:100%;max-width:560px;max-height:92vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,.85),var(--glow-t);transform:translateY(40px) scale(.95);opacity:0;transition:transform .38s var(--ease),opacity .38s var(--ease);scrollbar-width:thin;scrollbar-color:var(--teal) transparent}
+.modal-topbar{height:4px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--coral));border-radius:var(--r12) var(--r12) 0 0}
+.modal-head{padding:1.6rem 1.8rem 1.3rem;border-bottom:1px solid var(--bdr);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.modal-head-title{font-size:1.2rem;font-weight:800;color:var(--w)}
+.modal-head-sub{font-size:.83rem;color:var(--mut);margin-top:.3rem}
+.modal-x{width:36px;height:36px;border-radius:var(--r4);background:var(--glass);border:1px solid var(--bdr);color:var(--mut);font-size:1rem;display:grid;place-items:center;flex-shrink:0;transition:var(--t)}
+.modal-x:hover{background:rgba(251,113,133,.15);border-color:var(--coral);color:var(--coral)}
+.modal-body{padding:1.7rem 1.8rem}
+.step-label{font-size:.75rem;font-weight:700;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.step-label::before{content:'';flex:1;height:1px;background:var(--bdr);order:1}
+.step-label span{order:0}
+.svc-pick{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-bottom:1.7rem}
+.svc-tile{background:var(--glass);border:1.5px solid var(--bdr);border-radius:var(--r6);padding:.8rem 1rem;display:flex;align-items:center;gap:.6rem;font-size:.88rem;font-weight:600;color:var(--mut);cursor:pointer;transition:var(--t);user-select:none}
+.svc-tile:hover{border-color:var(--bdrh);color:var(--txt)}
+.svc-tile input[type=checkbox]{display:none}
+.svc-tile.on{background:rgba(45,212,191,.1);border-color:var(--teal);color:var(--teal)}
+.svc-tile-ico{font-size:1.15rem}
+.mdiv{border:none;border-top:1px solid var(--bdr);margin-block:1.5rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{margin-bottom:1.15rem}
+.field label{display:block;font-size:.78rem;font-weight:700;color:var(--teal);margin-bottom:.45rem;letter-spacing:.06em;text-transform:uppercase}
+.field label .req{color:var(--coral);margin-right:.25rem}
+.field input,.field select,.field textarea{width:100%;background:var(--glass);border:1.5px solid var(--bdr);border-radius:var(--r4);padding:.75rem 1rem;color:var(--txt);font-family:var(--fb);font-size:.93rem;outline:none;transition:border-color var(--t),box-shadow var(--t);appearance:none;-webkit-appearance:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(45,212,191,.15)}
+.field input::placeholder,.field textarea::placeholder{color:var(--dim)}
+.field textarea{resize:vertical;min-height:88px;line-height:1.65}
+.field select option{background:var(--ink2);color:var(--txt)}
+.field-hint{font-size:.73rem;color:var(--dim);margin-top:.3rem;display:block}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a9ab8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 1rem center;padding-left:2.5rem}
+
+/* Modal phone field — same fix */
+.phone-wrap{position:relative}
+.phone-prefix{position:absolute;top:50%;right:1rem;transform:translateY(-50%);color:var(--mut);font-size:.85rem;font-weight:600;pointer-events:none;direction:ltr;unicode-bidi:isolate}
+.phone-wrap input{padding-right:5.8rem;direction:ltr;unicode-bidi:isolate;text-align:left;font-size:.93rem;font-variant-numeric:tabular-nums}
+
+.urg-row{display:flex;gap:.7rem}
+.urg-btn{flex:1;background:var(--glass);border:1.5px solid var(--bdr);border-radius:var(--r4);padding:.6rem .4rem;text-align:center;font-size:.82rem;font-weight:700;color:var(--mut);transition:var(--t)}
+.urg-btn:hover{border-color:var(--bdrh)}
+.urg-n{background:rgba(52,211,153,.1);border-color:var(--green);color:var(--green)}
+.urg-u{background:rgba(245,158,11,.1);border-color:var(--gold);color:var(--gold)}
+.urg-x{background:rgba(251,113,133,.1);border-color:var(--coral);color:var(--coral)}
+.privacy-box{display:flex;gap:.6rem;align-items:flex-start;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2);border-radius:var(--r4);padding:.85rem 1rem;font-size:.8rem;color:var(--mut);margin-bottom:1.4rem}
+.privacy-box .pico{font-size:1rem;flex-shrink:0;margin-top:.05rem}
+.btn-submit .spin{display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.btn-submit.ld .btn-txt{display:none}.btn-submit.ld .spin{display:block}
+.modal-ok{display:none;text-align:center;padding:3rem 2rem}
+.modal-ok.show{display:block}
+.ok-ico{font-size:4.5rem;display:block;margin-bottom:1rem;animation:popIn .5s var(--ease) both}
+@keyframes popIn{from{transform:scale(0) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.ok-h{font-size:1.45rem;font-weight:800;color:var(--w);margin-bottom:.75rem}
+.ok-p{color:var(--mut);margin-bottom:2rem;line-height:1.85;font-size:.95rem}
+
+/* Scroll reveals */
+[data-r]{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+[data-r].vis{opacity:1;transform:none}
+[data-r][data-d="1"]{transition-delay:.1s}
+[data-r][data-d="2"]{transition-delay:.2s}
+[data-r][data-d="3"]{transition-delay:.3s}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media(max-width:960px){
+  .hero-grid,.why-layout,.contact-layout{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .callout-box{position:static}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .frow{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .ham{display:flex}
+  .nav-links.open{display:flex;flex-direction:column;align-items:flex-start;position:absolute;top:62px;inset-inline:0;background:rgba(10,22,40,.97);border-bottom:1px solid var(--bdr);padding:1.5rem;gap:1.25rem;z-index:99}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-actions,.cta-btns{flex-direction:column;align-items:stretch}
+  .svc-pick{grid-template-columns:1fr}
+  .urg-row{flex-direction:column}
+  .modal{border-radius:var(--r8)}
+  .back-top{display:none}
+}
+@media(max-width:480px){
+  .price-table{min-width:480px}
+  .td-cta{display:none} /* hide order btn column on smallest screens */
+}
+
+/* ═══════ PRINT STYLES ═══════ */
+@media print{
+  .site-header,.wa-fab,.back-top,.cta-band,.overlay,.toast{display:none!important}
+  .bg-layer{display:none}
+  body{background:#fff;color:#000}
+  .price-table{border:1px solid #ccc}
+  .price-table td,.price-table th{border-bottom:1px solid #eee}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer" aria-hidden="true">
+  <div class="bg-pattern"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" role="banner">
+  <nav class="nav container" aria-label="التنقل الرئيسي">
+    <a href="#top" class="nav-brand">
+      <div class="brand-mark" aria-hidden="true">💻</div>
+      MESSAOUD&nbsp;<span class="brand-accent">TECH</span>NOVA
+    </a>
+    <button class="ham" id="hamBtn" aria-label="فتح القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#services" data-section="services">الخدمات</a></li>
+      <li><a href="#pricing" data-section="pricing">الأسعار</a></li>
+      <li><a href="#why" data-section="why">مميزاتنا</a></li>
+      <li><a href="#contact-sec" data-section="contact-sec">تواصل معنا</a></li>
+      <li>
+        <button class="btn btn-teal order-open" aria-haspopup="dialog">✦ اطلب الآن</button>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="chip">📍 سوق أهراس · الجزائر</span>
+      </div>
+      <h1 class="hero-title" id="hero-h1">
+        خدمات تقنية<br>
+        <span class="grad-text">احترافية</span><br>
+        في جميع أنحاء الجزائر
+      </h1>
+      <p class="hero-desc">
+        نقدم حلولاً رقمية متكاملة لإصلاح الأجهزة، تثبيت الأنظمة، تصميم المواقع وحماية البيانات — بأسعار شفافة وخدمة احترافية تصل إلى جميع الولايات.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-gold btn-lg order-open" aria-haspopup="dialog">🛒 اطلب الخدمة الآن</button>
+        <a href="https://wa.me/213675781689?text=السلام%20عليكم%20أريد%20الاستفسار%20عن%20خدمة"
+           class="btn btn-wa btn-lg" target="_blank" rel="noopener noreferrer">📱 واتساب مباشر</a>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="srv-previews">
+        <!-- FIXED: price text wrapped with proper bidi spans -->
+        <div class="srv-preview">
+          <div class="srv-preview-ico ico-t">🌐</div>
+          <div>
+            <p class="srv-preview-name">تصميم موقع إلكتروني</p>
+            <p class="srv-preview-price">ابتداءً من <span class="amt price-num">5 000 دج</span></p>
+          </div>
+        </div>
+        <div class="srv-preview">
+          <div class="srv-preview-ico ico-g">💻</div>
+          <div>
+            <p class="srv-preview-name">تثبيت Windows + البرامج</p>
+            <p class="srv-preview-price"><span class="amt price-num">1 000 دج</span> شاملة</p>
+          </div>
+        </div>
+        <div class="srv-preview">
+          <div class="srv-preview-ico ico-c">🔧</div>
+          <div>
+            <p class="srv-preview-name">إصلاح الحواسيب والأجهزة</p>
+            <p class="srv-preview-price">ابتداءً من <span class="amt price-num">1 500 دج</span></p>
+          </div>
+        </div>
+        <div class="srv-preview">
+          <div class="srv-preview-ico ico-r">🛡️</div>
+          <div>
+            <p class="srv-preview-name">حماية وتأمين الجهاز</p>
+            <p class="srv-preview-price"><span class="amt price-num">1 200 دج</span> شامل الفحص</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Stats -->
+<div class="trust-strip" role="region" aria-label="إحصائيات">
+  <div class="container">
+    <dl class="trust-grid">
+      <div><dt class="trust-num">+200</dt><dd class="trust-lbl">عميل راضٍ</dd></div>
+      <div><dt class="trust-num">4+</dt><dd class="trust-lbl">سنوات خبرة</dd></div>
+      <div><dt class="trust-num">48h</dt><dd class="trust-lbl">أقصى وقت استجابة</dd></div>
+      <div><dt class="trust-num">5 ★</dt><dd class="trust-lbl">تقييم العملاء</dd></div>
+    </dl>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services" aria-labelledby="srv-title">
+  <div class="container">
+    <span class="chip" style="display:block;text-align:center" data-r>🛠️ ما نقدمه</span>
+    <h2 class="section-title" id="srv-title" data-r>خدماتنا التقنية الاحترافية</h2>
+    <p class="section-sub" data-r>حلول شاملة ومتكاملة تغطي جميع احتياجاتك الرقمية</p>
+    <div class="srv-grid">
+
+      <article class="srv-card" data-r data-d="1">
+        <div class="srv-ico">🌐</div>
+        <h3 class="srv-name">تصميم المواقع الإلكترونية</h3>
+        <p class="srv-desc">نصمم مواقع احترافية وسريعة ومتجاوبة مع جميع الأجهزة، تعكس هويتك التجارية وتجذب العملاء.</p>
+        <!-- FIXED: price pill uses structured spans for correct bidi -->
+        <div class="price-pill">
+          <span class="p-icon">💰</span>
+          <span class="p-label">ابتداءً من</span>
+          <span class="p-val">5 000</span>
+          <span class="p-unit">دج</span>
+        </div>
+        <button class="srv-link order-open" data-svc="تصميم المواقع الإلكترونية">
+          اطلب هذه الخدمة <span class="arr" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="srv-card" data-r data-d="2">
+        <div class="srv-ico">💻</div>
+        <h3 class="srv-name">تثبيت Windows والبرامج</h3>
+        <p class="srv-desc">تثبيت نظيف وسريع لنظام التشغيل مع جميع البرامج الأساسية، مع ضمان الأداء الكامل والمستقر.</p>
+        <div class="price-pill">
+          <span class="p-icon">💰</span>
+          <span class="p-val">1 000</span>
+          <span class="p-unit">دج</span>
+          <span class="p-label">شاملة</span>
+        </div>
+        <button class="srv-link order-open" data-svc="تثبيت Windows والبرامج">
+          اطلب هذه الخدمة <span class="arr" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="srv-card" data-r data-d="3">
+        <div class="srv-ico">🔧</div>
+        <h3 class="srv-name">إصلاح الحواسيب والأجهزة</h3>
+        <p class="srv-desc">تشخيص دقيق وإصلاح شامل لجميع الأعطال المادية والبرمجية بسرعة وكفاءة عالية.</p>
+        <div class="price-pill">
+          <span class="p-icon">💰</span>
+          <span class="p-label">من</span>
+          <span class="p-val">1 500</span>
+          <span class="p-unit">دج</span>
+          <span class="p-label">إلى</span>
+          <span class="p-val">4 000</span>
+          <span class="p-unit">دج</span>
+        </div>
+        <button class="srv-link order-open" data-svc="إصلاح الحواسيب والأجهزة">
+          اطلب هذه الخدمة <span class="arr" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="srv-card" data-r data-d="1">
+        <div class="srv-ico">🛡️</div>
+        <h3 class="srv-name">حماية من الفيروسات والمخاطر</h3>
+        <p class="srv-desc">تنظيف شامل للفيروسات والبرامج الضارة، وتأمين بياناتك بأحدث أدوات الحماية.</p>
+        <div class="price-pill">
+          <span class="p-icon">💰</span>
+          <span class="p-val">1 200</span>
+          <span class="p-unit">دج</span>
+          <span class="p-label">شامل الفحص</span>
+        </div>
+        <button class="srv-link order-open" data-svc="حماية من الفيروسات">
+          اطلب هذه الخدمة <span class="arr" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="srv-card" data-r data-d="2">
+        <div class="srv-ico">⚙️</div>
+        <h3 class="srv-name">صيانة النظام وتحسين الأداء</h3>
+        <p class="srv-desc">حل مشاكل Windows البطيء والتعليق والأخطاء البرمجية، وتحسين سرعة الجهاز بشكل ملحوظ.</p>
+        <div class="price-pill">
+          <span class="p-icon">💰</span>
+          <span class="p-val">800</span>
+          <span class="p-unit">دج</span>
+        </div>
+        <button class="srv-link order-open" data-svc="صيانة النظام وتحسين الأداء">
+          اطلب هذه الخدمة <span class="arr" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="srv-card" data-r data-d="3">
+        <div class="srv-ico">📡</div>
+        <h3 class="srv-name">استشارات تقنية مجانية</h3>
+        <p class="srv-desc">نصائح واستشارات متخصصة لمساعدتك في اتخاذ القرار الصحيح لجهازك أو مشروعك الرقمي.</p>
+        <div class="price-pill" style="background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--green)">
+          <span class="p-icon">✅</span>
+          <span class="p-label" style="color:var(--green)">مجاناً تماماً</span>
+        </div>
+        <button class="srv-link order-open" data-svc="استشارة تقنية مجانية">
+          احصل على الاستشارة <span class="arr" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     PRICING — Table layout for clarity
+════════════════════════════════════ -->
+<section class="pricing" id="pricing" aria-labelledby="price-title">
+  <div class="container">
+    <span class="chip" style="display:block;text-align:center" data-r>💰 قائمة الأسعار</span>
+    <h2 class="section-title" id="price-title" data-r>أسعار شفافة ومحدَّثة</h2>
+    <p class="section-sub" data-r>أسعار واضحة بدون رسوم مخفية — يُتفَق على السعر النهائي بعد الفحص المجاني</p>
+
+    <!--
+      FIXED PRICING TABLE
+      Numbers use dir="ltr" + unicode-bidi:isolate to prevent
+      Arabic RTL context from reversing digit order or dash direction
+      in ranges like "1 500 – 4 000"
+    -->
+    <div class="price-table-wrap" data-r>
+      <table class="price-table" role="table" aria-label="جدول الأسعار">
+        <thead>
+          <tr>
+            <th scope="col">الخدمة</th>
+            <th scope="col" class="th-price">السعر</th>
+            <th scope="col" class="th-note">ملاحظة</th>
+            <th scope="col" class="th-note">اطلب</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="featured-row">
+            <td>
+              <div class="td-svc">
+                <div class="td-ico">🌐</div>
+                <div>
+                  <span class="td-name">تصميم موقع إلكتروني</span>
+                  <span class="td-sub">موقع متجاوب واحترافي</span>
+                </div>
+              </div>
+            </td>
+            <td class="td-price">
+              <!-- BIDI FIX: amount in isolated LTR span -->
+              <span class="amount" dir="ltr">5 000+</span>
+              <span class="unit">دج</span>
+            </td>
+            <td class="td-note">حسب تعقيد المشروع</td>
+            <td class="td-cta">
+              <button class="td-order-btn order-open" data-svc="تصميم المواقع الإلكترونية">اطلب</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td-svc">
+                <div class="td-ico">💻</div>
+                <div>
+                  <span class="td-name">تثبيت Windows + برامج</span>
+                  <span class="td-sub">نظام + البرامج الأساسية</span>
+                </div>
+              </div>
+            </td>
+            <td class="td-price">
+              <span class="amount" dir="ltr">1 000</span>
+              <span class="unit">دج</span>
+            </td>
+            <td class="td-note">شاملة التثبيت الكامل</td>
+            <td class="td-cta">
+              <button class="td-order-btn order-open" data-svc="تثبيت Windows والبرامج">اطلب</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td-svc">
+                <div class="td-ico">🔧</div>
+                <div>
+                  <span class="td-name">إصلاح الحاسوب</span>
+                  <span class="td-sub">أعطال مادية وبرمجية</span>
+                </div>
+              </div>
+            </td>
+            <td class="td-price">
+              <!--
+                CRITICAL BIDI FIX: Range with em-dash
+                Without dir="ltr", "1 500 – 4 000" may display
+                as "000 4 – 500 1" in strict RTL renderers.
+                The dir attribute on the td plus the span ensures
+                correct display in all browsers and screen readers.
+              -->
+              <span class="amount" dir="ltr">1 500 – 4 000</span>
+              <span class="unit">دج</span>
+            </td>
+            <td class="td-note">يُحدَّد بعد الفحص المجاني</td>
+            <td class="td-cta">
+              <button class="td-order-btn order-open" data-svc="إصلاح الحواسيب والأجهزة">اطلب</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td-svc">
+                <div class="td-ico">🛡️</div>
+                <div>
+                  <span class="td-name">إزالة الفيروسات + حماية</span>
+                  <span class="td-sub">تنظيف + برنامج حماية</span>
+                </div>
+              </div>
+            </td>
+            <td class="td-price">
+              <span class="amount" dir="ltr">1 200</span>
+              <span class="unit">دج</span>
+            </td>
+            <td class="td-note">شامل الفحص الكامل</td>
+            <td class="td-cta">
+              <button class="td-order-btn order-open" data-svc="حماية من الفيروسات">اطلب</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td-svc">
+                <div class="td-ico">⚙️</div>
+                <div>
+                  <span class="td-name">صيانة النظام</span>
+                  <span class="td-sub">تسريع + إصلاح الأخطاء</span>
+                </div>
+              </div>
+            </td>
+            <td class="td-price">
+              <span class="amount" dir="ltr">800</span>
+              <span class="unit">دج</span>
+            </td>
+            <td class="td-note">دون تثبيت نظام</td>
+            <td class="td-cta">
+              <button class="td-order-btn order-open" data-svc="صيانة النظام وتحسين الأداء">اطلب</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td-svc">
+                <div class="td-ico">📡</div>
+                <div>
+                  <span class="td-name">استشارة تقنية</span>
+                  <span class="td-sub">نصيحة + فحص أولي</span>
+                </div>
+              </div>
+            </td>
+            <td class="td-price">
+              <span class="free-badge">✅ مجاناً</span>
+            </td>
+            <td class="td-note">للجميع بدون شروط</td>
+            <td class="td-cta">
+              <button class="td-order-btn order-open" data-svc="استشارة تقنية مجانية">اطلب</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pricing-note" data-r>
+      <span class="pn-ico">ℹ️</span>
+      <span>
+        <strong>ملاحظة مهمة:</strong> جميع الأسعار تقريبية وقد تختلف حسب طبيعة المشكلة. يُتفَق على السعر النهائي بعد الفحص المجاني الأولي. أسعار التنقل خارج سوق أهراس تُحدَّد بالاتفاق المسبق.
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why" aria-labelledby="why-title">
+  <div class="container">
+    <span class="chip" style="display:block;text-align:center" data-r>⭐ لماذا نحن</span>
+    <h2 class="section-title" id="why-title" data-r>ما يميز Messaoud TechNova</h2>
+    <p class="section-sub" data-r>التزامنا بالجودة والشفافية يجعلنا الاختيار الأول في المنطقة</p>
+    <div class="why-layout">
+      <div class="why-feats">
+        <div class="feat" data-r><div class="feat-ico">⚡</div><div><p class="feat-h">سرعة في التنفيذ</p><p class="feat-p">نلتزم بإنجاز الخدمة في أقصر وقت ممكن مع الحفاظ على أعلى معايير الجودة والدقة المهنية.</p></div></div>
+        <div class="feat" data-r><div class="feat-ico">🔍</div><div><p class="feat-h">فحص مجاني قبل التسعير</p><p class="feat-p">لا ندفعك لأي شيء قبل أن تعرف المشكلة وتقرر. نشخّص جهازك مجاناً ونوضح لك الحل والتكلفة مسبقاً.</p></div></div>
+        <div class="feat" data-r><div class="feat-ico">💰</div><div><p class="feat-h">أسعار عادلة وشفافة</p><p class="feat-p">أسعارنا واضحة وثابتة، يتم الاتفاق عليها مسبقاً بدون أي رسوم مفاجئة أو مخفية في نهاية الخدمة.</p></div></div>
+        <div class="feat" data-r><div class="feat-ico">🤝</div><div><p class="feat-h">دعم ما بعد الخدمة</p><p class="feat-p">نتابعك بعد الانتهاء من الخدمة ونبقى متاحين لأي استفسار أو مشكلة طارئة لضمان رضاك التام.</p></div></div>
+        <div class="feat" data-r><div class="feat-ico">📍</div><div><p class="feat-h">خدمة في جميع الولايات</p><p class="feat-p">نقدم خدماتنا عن بُعد لجميع ولايات الجزائر الـ58، مع إمكانية الزيارة الميدانية في المنطقة الشرقية.</p></div></div>
+      </div>
+      <div class="callout-box" data-r>
+        <div class="callout-geo"><span class="callout-geo-ico">🔍</span></div>
+        <h3 class="callout-h">ابدأ بالفحص المجاني</h3>
+        <p class="callout-p">لا تدفع حتى تعرف المشكلة وتقتنع بالحل. نشخّص جهازك مجاناً، نشرح لك ما وجدناه، ونتفق معك على السعر قبل البدء في أي عمل.</p>
+        <a href="https://wa.me/213675781689?text=مرحباً%20أريد%20فحص%20مجاني%20للجهاز"
+           class="free-btn" target="_blank" rel="noopener noreferrer">✅ احصل على الفحص المجاني</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     CONTACT — Enhanced phone display
+════════════════════════════════════ -->
+<section class="contact-sec" id="contact-sec" aria-labelledby="contact-title">
+  <div class="container">
+    <span class="chip" style="display:block;text-align:center" data-r>📞 تواصل معنا</span>
+    <h2 class="section-title" id="contact-title" data-r>معلومات التواصل</h2>
+    <p class="section-sub" data-r>نحن متاحون للرد على جميع استفساراتكم</p>
+    <div class="contact-layout">
+      <div class="contact-info-box" data-r>
+        <h3>بيانات التواصل الرسمية</h3>
+
+        <div class="c-row">
+          <div class="c-ico">📍</div>
+          <div>
+            <p class="c-label">الموقع الجغرافي</p>
+            <p class="c-val">سوق أهراس، ولاية سوق أهراس — الجزائر</p>
+          </div>
+        </div>
+
+        <!-- PHONE 1 — Full international format with copy button -->
+        <div class="c-row">
+          <div class="c-ico">📞</div>
+          <div>
+            <p class="c-label">الهاتف الأول</p>
+            <div class="phone-display">
+              <!--
+                FIXED: Phone numbers
+                1. Wrapped in dir="ltr" + unicode-bidi:isolate
+                2. Uses ITU-T E.164 format: +213 6 75 78 16 89
+                3. Paired with tel: href for click-to-call
+                4. Clearly labelled with service badges
+              -->
+              <a href="tel:+213675781689" dir="ltr" class="phone-num">
+                <span>+213</span>
+                <span>6 75 78 16 89</span>
+              </a>
+              <span class="phone-badge badge-wa">واتساب ✓</span>
+              <button class="phone-copy-btn" data-num="+213675781689" aria-label="نسخ الرقم" title="نسخ الرقم">📋</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHONE 2 -->
+        <div class="c-row">
+          <div class="c-ico">📞</div>
+          <div>
+            <p class="c-label">الهاتف الثاني</p>
+            <div class="phone-display">
+              <a href="tel:+213561167181" dir="ltr" class="phone-num">
+                <span>+213</span>
+                <span>5 61 16 71 81</span>
+              </a>
+              <span class="phone-badge badge-mobile">هاتف ثابت</span>
+              <button class="phone-copy-btn" data-num="+213561167181" aria-label="نسخ الرقم" title="نسخ الرقم">📋</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="c-row">
+          <div class="c-ico">📧</div>
+          <div>
+            <p class="c-label">البريد الإلكتروني</p>
+            <p class="c-val"><a href="mailto:messaoudzaafour@gmail.com">messaoudzaafour@gmail.com</a></p>
+          </div>
+        </div>
+
+        <div class="c-row">
+          <div class="c-ico">🕐</div>
+          <div>
+            <p class="c-label">أوقات العمل</p>
+            <p class="c-val">السبت – الخميس: <span class="ltr">8:00 ص – 8:00 م</span></p>
+          </div>
+        </div>
+
+        <div class="wa-row">
+          <span style="font-size:1.5rem" aria-hidden="true">📱</span>
+          <div class="wa-row-text">
+            <strong dir="ltr">+213 6 75 78 16 89</strong>
+            تواصل مباشر وسريع — نرد عادةً خلال أقل من ساعة
+          </div>
+          <a href="https://wa.me/213675781689?text=السلام%20عليكم"
+             class="btn btn-wa" target="_blank" rel="noopener noreferrer">راسلنا</a>
+        </div>
+      </div>
+
+      <div class="map-placeholder" data-r>
+        <div class="map-ico">🗺️</div>
+        <h3>سوق أهراس، الجزائر</h3>
+        <p>نقدم خدماتنا عن بُعد لجميع الولايات، وبشكل ميداني في المنطقة الشرقية</p>
+        <a href="https://wa.me/213675781689?text=أريد%20الاستفسار%20عن%20الخدمة%20الميدانية"
+           class="btn btn-outline" target="_blank" rel="noopener noreferrer">استفسر عن الخدمة الميدانية</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" aria-label="دعوة للتواصل">
+  <div class="container">
+    <h2 data-r>جاهز للبدء؟ فريقنا ينتظرك 🚀</h2>
+    <p data-r>اطلب خدمتك الآن أو تواصل معنا للاستفسار — الرد سريع والخدمة فورية</p>
+    <div class="cta-btns" data-r>
+      <button class="btn btn-gold btn-lg order-open">🛒 اطلب الخدمة الآن</button>
+      <a href="https://wa.me/213675781689?text=السلام%20عليكم%20أريد%20الاستفسار"
+         class="btn btn-wa btn-lg" target="_blank" rel="noopener noreferrer">📱 واتساب مباشر</a>
+      <a href="mailto:messaoudzaafour@gmail.com" class="btn btn-outline btn-lg">📧 راسلنا</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="nav-brand">
+          <div class="brand-mark" aria-hidden="true">💻</div>
+          MESSAOUD&nbsp;<span class="brand-accent">TECH</span>NOVA
+        </a>
+        <p>خدمات تقنية احترافية في الجزائر. نقدم حلولاً رقمية متكاملة بأسعار عادلة ودعم متواصل لجميع ولايات الجزائر.</p>
+      </div>
+      <nav aria-label="روابط سريعة">
+        <p class="footer-h">روابط سريعة</p>
+        <ul class="footer-links" role="list">
+          <li><a href="#services">الخدمات</a></li>
+          <li><a href="#pricing">الأسعار</a></li>
+          <li><a href="#why">مميزاتنا</a></li>
+          <li><a href="#contact-sec">تواصل معنا</a></li>
+        </ul>
+      </nav>
+      <address style="font-style:normal">
+        <p class="footer-h">معلومات التواصل</p>
+        <div class="footer-cr">
+          <span class="footer-cr-ico" aria-hidden="true">📍</span>
+          <span>سوق أهراس، الجزائر</span>
+        </div>
+        <div class="footer-cr">
+          <span class="footer-cr-ico" aria-hidden="true">📞</span>
+          <div>
+            <!-- FIXED: footer phone numbers with proper bidi -->
+            <a href="tel:+213675781689">
+              <span class="footer-phone" dir="ltr">+213 6 75 78 16 89</span>
+            </a>
+            <br><small style="color:var(--dim);font-size:.73rem">واتساب متاح ✓</small>
+          </div>
+        </div>
+        <div class="footer-cr">
+          <span class="footer-cr-ico" aria-hidden="true">📞</span>
+          <a href="tel:+213561167181">
+            <span class="footer-phone" dir="ltr">+213 5 61 16 71 81</span>
+          </a>
+        </div>
+        <div class="footer-cr">
+          <span class="footer-cr-ico" aria-hidden="true">📧</span>
+          <a href="mailto:messaoudzaafour@gmail.com">messaoudzaafour@gmail.com</a>
+        </div>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 <a href="#top">Messaoud TechNova</a>. جميع الحقوق محفوظة.</span>
+      <span>صُنع بـ ❤️ في الجزائر 🇩🇿</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button class="back-top" id="backTop" aria-label="العودة إلى الأعلى">↑</button>
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/213675781689?text=السلام%20عليكم%20أريد%20الاستفسار%20عن%20خدمة"
+   class="wa-fab" target="_blank" rel="noopener noreferrer"
+   aria-label="تواصل معنا عبر واتساب">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ORDER MODAL -->
+<div class="overlay" id="orderOverlay" role="dialog" aria-modal="true" aria-labelledby="modal-h">
+  <div class="modal" id="modalBox">
+    <div class="modal-topbar" aria-hidden="true"></div>
+    <div class="modal-head">
+      <div>
+        <p class="modal-head-title" id="modal-h">🛒 طلب خدمة جديدة</p>
+        <p class="modal-head-sub">أكمل التفاصيل وسنتواصل معك في أقرب وقت</p>
+      </div>
+      <button class="modal-x" id="modalClose" aria-label="إغلاق النموذج">✕</button>
+    </div>
+    <div class="modal-body" id="modalForm">
+      <p class="step-label"><span>اختر الخدمة المطلوبة</span></p>
+      <div class="svc-pick" id="svcPick">
+        <label class="svc-tile" data-v="تصميم المواقع الإلكترونية"><input type="checkbox" value="تصميم المواقع"><span class="svc-tile-ico">🌐</span>تصميم موقع</label>
+        <label class="svc-tile" data-v="تثبيت Windows والبرامج"><input type="checkbox" value="تثبيت Windows"><span class="svc-tile-ico">💻</span>تثبيت Windows</label>
+        <label class="svc-tile" data-v="إصلاح الحواسيب والأجهزة"><input type="checkbox" value="إصلاح الأجهزة"><span class="svc-tile-ico">🔧</span>إصلاح الأجهزة</label>
+        <label class="svc-tile" data-v="حماية من الفيروسات"><input type="checkbox" value="حماية فيروسات"><span class="svc-tile-ico">🛡️</span>حماية فيروسات</label>
+        <label class="svc-tile" data-v="صيانة النظام وتحسين الأداء"><input type="checkbox" value="صيانة النظام"><span class="svc-tile-ico">⚙️</span>صيانة النظام</label>
+        <label class="svc-tile" data-v="استشارة تقنية مجانية"><input type="checkbox" value="استشارة مجانية"><span class="svc-tile-ico">📡</span>استشارة مجانية</label>
+      </div>
+      <hr class="mdiv"/>
+      <p class="step-label"><span>بياناتك الشخصية</span></p>
+      <div class="frow">
+        <div class="field">
+          <label for="f-name"><span class="req">*</span> الاسم الكامل</label>
+          <input type="text" id="f-name" placeholder="مثال: محمد زعفور" autocomplete="name" required/>
+        </div>
+        <div class="field">
+          <label for="f-wilaya"><span class="req">*</span> الولاية</label>
+          <select id="f-wilaya" required>
+            <option value="" disabled selected>اختر ولايتك</option>
+            <optgroup label="الولايات الـ 58">
+              <option value="01 - أدرار">01 - أدرار</option>
+              <option value="02 - الشلف">02 - الشلف</option>
+              <option value="03 - الأغواط">03 - الأغواط</option>
+              <option value="04 - أم البواقي">04 - أم البواقي</option>
+              <option value="05 - باتنة">05 - باتنة</option>
+              <option value="06 - بجاية">06 - بجاية</option>
+              <option value="07 - بسكرة">07 - بسكرة</option>
+              <option value="08 - بشار">08 - بشار</option>
+              <option value="09 - البليدة">09 - البليدة</option>
+              <option value="10 - البويرة">10 - البويرة</option>
+              <option value="11 - تمنراست">11 - تمنراست</option>
+              <option value="12 - تبسة">12 - تبسة</option>
+              <option value="13 - تلمسان">13 - تلمسان</option>
+              <option value="14 - تيارت">14 - تيارت</option>
+              <option value="15 - تيزي وزو">15 - تيزي وزو</option>
+              <option value="16 - الجزائر">16 - الجزائر العاصمة</option>
+              <option value="17 - الجلفة">17 - الجلفة</option>
+              <option value="18 - جيجل">18 - جيجل</option>
+              <option value="19 - سطيف">19 - سطيف</option>
+              <option value="20 - سعيدة">20 - سعيدة</option>
+              <option value="21 - سكيكدة">21 - سكيكدة</option>
+              <option value="22 - سيدي بلعباس">22 - سيدي بلعباس</option>
+              <option value="23 - عنابة">23 - عنابة</option>
+              <option value="24 - قالمة">24 - قالمة</option>
+              <option value="25 - قسنطينة">25 - قسنطينة</option>
+              <option value="26 - المدية">26 - المدية</option>
+              <option value="27 - مستغانم">27 - مستغانم</option>
+              <option value="28 - المسيلة">28 - المسيلة</option>
+              <option value="29 - معسكر">29 - معسكر</option>
+              <option value="30 - ورقلة">30 - ورقلة</option>
+              <option value="31 - وهران">31 - وهران</option>
+              <option value="32 - البيض">32 - البيض</option>
+              <option value="33 - إليزي">33 - إليزي</option>
+              <option value="34 - برج بوعريريج">34 - برج بوعريريج</option>
+              <option value="35 - بومرداس">35 - بومرداس</option>
+              <option value="36 - الطارف">36 - الطارف</option>
+              <option value="37 - تندوف">37 - تندوف</option>
+              <option value="38 - تيسمسيلت">38 - تيسمسيلت</option>
+              <option value="39 - الوادي">39 - الوادي</option>
+              <option value="40 - خنشلة">40 - خنشلة</option>
+              <option value="41 - سوق أهراس" selected>41 - سوق أهراس ⭐</option>
+              <option value="42 - تيبازة">42 - تيبازة</option>
+              <option value="43 - ميلة">43 - ميلة</option>
+              <option value="44 - عين الدفلى">44 - عين الدفلى</option>
+              <option value="45 - النعامة">45 - النعامة</option>
+              <option value="46 - عين تموشنت">46 - عين تموشنت</option>
+              <option value="47 - غرداية">47 - غرداية</option>
+              <option value="48 - غليزان">48 - غليزان</option>
+              <option value="49 - تيميمون">49 - تيميمون</option>
+              <option value="50 - برج باجي مختار">50 - برج باجي مختار</option>
+              <option value="51 - أولاد جلال">51 - أولاد جلال</option>
+              <option value="52 - بني عباس">52 - بني عباس</option>
+              <option value="53 - عين صالح">53 - عين صالح</option>
+              <option value="54 - عين قزام">54 - عين قزام</option>
+              <option value="55 - تقرت">55 - تقرت</option>
+              <option value="56 - جانت">56 - جانت</option>
+              <option value="57 - المغير">57 - المغير</option>
+              <option value="58 - المنيعة">58 - المنيعة</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-phone"><span class="req">*</span> رقم الهاتف</label>
+        <div class="phone-wrap">
+          <span class="phone-prefix" aria-hidden="true">🇩🇿 +213</span>
+          <input type="tel" id="f-phone" placeholder="6 75 78 16 89"
+                 autocomplete="tel" required pattern="[0-9 ]{8,14}"
+                 inputmode="numeric" dir="ltr" unicode-bidi="isolate"/>
+        </div>
+        <span class="field-hint">أدخل الرقم بدون الصفر الأول — مثال: <span dir="ltr" style="display:inline-block">6 75 78 16 89</span></span>
+      </div>
+      <div class="field">
+        <label for="f-pref">طريقة التواصل المفضلة</label>
+        <select id="f-pref">
+          <option value="whatsapp">📱 واتساب (الأسرع)</option>
+          <option value="call">📞 مكالمة هاتفية</option>
+          <option value="email">📧 بريد إلكتروني</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>درجة الاستعجال</label>
+        <div class="urg-row">
+          <button type="button" class="urg-btn urg-n" data-u="عادي — خلال 48 ساعة">🟢 عادي</button>
+          <button type="button" class="urg-btn" data-u="عاجل — خلال 24 ساعة">🟡 عاجل</button>
+          <button type="button" class="urg-btn" data-u="فوري — في نفس اليوم">🔴 فوري</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-notes">تفاصيل المشكلة أو الطلب</label>
+        <textarea id="f-notes" placeholder="صف مشكلتك بإيجاز: نوع الجهاز، نظام التشغيل، العطل الظاهر..."></textarea>
+      </div>
+      <div class="privacy-box" role="note">
+        <span class="pico">🔒</span>
+        <span>بياناتك محمية ومحفوظة بسرية تامة. نستخدمها فقط للتواصل معك بشأن طلبك.</span>
+      </div>
+      <button type="button" class="btn btn-gold btn-lg btn-block btn-submit" id="submitBtn">
+        <span class="btn-txt">✦ إرسال الطلب عبر واتساب</span>
+        <span class="spin" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="modal-ok" id="modalOk" role="status" aria-live="polite">
+      <span class="ok-ico">🎉</span>
+      <h3 class="ok-h">تم إرسال طلبك بنجاح!</h3>
+      <p class="ok-p">
+        شكراً لك <strong id="ok-name">عزيزي العميل</strong>!<br>
+        تم فتح واتساب برسالتك تلقائياً. للتواصل المباشر:<br><br>
+        <a href="tel:+213675781689" style="color:var(--teal)" dir="ltr"><strong>+213 6 75 78 16 89</strong></a>
+        <br><small style="color:var(--dim)">سنتواصل معك عبر <strong id="ok-pref">واتساب</strong> في أقرب وقت</small>
+      </p>
+      <a href="https://wa.me/213675781689" class="btn btn-wa btn-lg" target="_blank" rel="noopener noreferrer">📱 فتح واتساب مباشرة</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Nav toggle with animated hamburger ── */
+const hamBtn=document.getElementById('hamBtn');
+const navLinks=document.getElementById('navLinks');
+hamBtn.addEventListener('click',()=>{
+  const open=navLinks.classList.toggle('open');
+  hamBtn.classList.toggle('open',open);
+  hamBtn.setAttribute('aria-expanded',open);
+});
+navLinks.querySelectorAll('a,button').forEach(el=>
+  el.addEventListener('click',()=>{
+    navLinks.classList.remove('open');
+    hamBtn.classList.remove('open');
+  })
+);
+
+/* ── Active nav link on scroll ── */
+const sections=document.querySelectorAll('section[id], main[id]');
+const navAnchors=document.querySelectorAll('.nav-links a[data-section]');
+const activeObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navAnchors.forEach(a=>a.classList.remove('active'));
+      const link=document.querySelector(`.nav-links a[data-section="${e.target.id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
+},{threshold:.35});
+sections.forEach(s=>activeObs.observe(s));
+
+/* ── Scroll reveal ── */
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const delay=Number(e.target.dataset.d||0)*90;
+      setTimeout(()=>e.target.classList.add('vis'),delay);
+      revObs.unobserve(e.target);
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('[data-r]').forEach(el=>revObs.observe(el));
+
+/* ── Back to top ── */
+const backTop=document.getElementById('backTop');
+window.addEventListener('scroll',()=>{
+  backTop.classList.toggle('show',window.scrollY>400);
+},{ passive:true });
+backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ── Toast notification ── */
+const toast=document.getElementById('toast');
+function showToast(msg,dur=2500){
+  toast.textContent=msg;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),dur);
+}
+
+/* ── Phone copy buttons ── */
+document.querySelectorAll('.phone-copy-btn').forEach(btn=>{
+  btn.addEventListener('click',async()=>{
+    const num=btn.dataset.num;
+    try{
+      await navigator.clipboard.writeText(num);
+      btn.classList.add('copied');
+      btn.textContent='✅';
+      showToast('✅ تم نسخ الرقم: '+num);
+      setTimeout(()=>{btn.classList.remove('copied');btn.textContent='📋';},2500);
+    }catch{
+      showToast('انسخ الرقم يدوياً: '+num,3500);
+    }
+  });
+});
+
+/* ── Modal ── */
+const overlay=document.getElementById('orderOverlay');
+const modalClose=document.getElementById('modalClose');
+const modalForm=document.getElementById('modalForm');
+const modalOk=document.getElementById('modalOk');
+const submitBtn=document.getElementById('submitBtn');
+
+function openModal(pre){
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+  if(pre) preselectService(pre);
+  setTimeout(()=>{
+    const first=overlay.querySelector('input:not([type=checkbox]),select');
+    if(first) first.focus();
+  },380);
+}
+function closeModal(){
+  overlay.classList.remove('open');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.order-open').forEach(b=>
+  b.addEventListener('click',()=>openModal(b.dataset.svc||''))
+);
+modalClose.addEventListener('click',closeModal);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ── Service tile toggle ── */
+function preselectService(name){
+  document.querySelectorAll('.svc-tile').forEach(t=>{
+    const v=t.dataset.v||'';
+    if(name&&v.includes(name.split(' ')[0])){
+      t.querySelector('input').checked=true;
+      t.classList.add('on');
+    }
+  });
+}
+document.querySelectorAll('.svc-tile').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const cb=t.querySelector('input');
+    cb.checked=!cb.checked;
+    t.classList.toggle('on',cb.checked);
+  });
+});
+
+/* ── Urgency ── */
+let urgency='عادي — خلال 48 ساعة';
+document.querySelectorAll('.urg-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.urg-btn').forEach(b=>b.className='urg-btn');
+    urgency=btn.dataset.u;
+    if(urgency.includes('عادي'))  btn.classList.add('urg-n');
+    if(urgency.includes('عاجل')) btn.classList.add('urg-u');
+    if(urgency.includes('فوري')) btn.classList.add('urg-x');
+  });
+});
+
+/* ── Phone auto-format (keeps LTR digit groups) ── */
+document.getElementById('f-phone').addEventListener('input',function(){
+  let v=this.value.replace(/\D/g,'').replace(/^0/,'').slice(0,9);
+  let out='';
+  for(let i=0;i<v.length;i++){
+    if(i===1||i===3||i===5||i===7) out+=' ';
+    out+=v[i];
+  }
+  this.value=out.trim();
+});
+
+/* ── Form submit ── */
+submitBtn.addEventListener('click',()=>{
+  const name   =document.getElementById('f-name').value.trim();
+  const phone  =document.getElementById('f-phone').value.trim();
+  const wilaya =document.getElementById('f-wilaya').value;
+  const pref   =document.getElementById('f-pref').value;
+  const notes  =document.getElementById('f-notes').value.trim();
+  const services=[...document.querySelectorAll('.svc-tile input:checked')]
+                   .map(c=>c.value).join(' + ')||'لم يُحدَّد';
+
+  if(!name)   {flash('f-name');   return;}
+  if(!phone)  {flash('f-phone');  return;}
+  if(!wilaya) {flash('f-wilaya'); return;}
+
+  submitBtn.classList.add('ld');
+  submitBtn.disabled=true;
+
+  const prefMap={whatsapp:'واتساب',call:'مكالمة هاتفية',email:'بريد إلكتروني'};
+  /* Format phone in ITU-T international standard for the message */
+  const digits=phone.replace(/\s/g,'');
+  const intlPhone=`+213 ${digits.charAt(0)} ${digits.slice(1,3)} ${digits.slice(3,5)} ${digits.slice(5,7)} ${digits.slice(7,9)}`;
+
+  const msg=
+    `🛒 *طلب خدمة جديد من الموقع*\n`+
+    `━━━━━━━━━━━━━━━━━━\n`+
+    `👤 الاسم: ${name}\n`+
+    `📞 الهاتف: ${intlPhone}\n`+
+    `📍 الولاية: ${wilaya}\n`+
+    `🔧 الخدمة: ${services}\n`+
+    `⚡ الاستعجال: ${urgency}\n`+
+    `📬 التواصل المفضل: ${prefMap[pref]}\n`+
+    (notes?`💬 التفاصيل:\n${notes}\n`:'')+
+    `━━━━━━━━━━━━━━━━━━\n`+
+    `✅ أرسل من الموقع الرسمي Messaoud TechNova`;
+
+  setTimeout(()=>{
+    submitBtn.classList.remove('ld');
+    submitBtn.disabled=false;
+    modalForm.style.display='none';
+    modalOk.classList.add('show');
+    document.getElementById('ok-name').textContent=name;
+    document.getElementById('ok-pref').textContent=prefMap[pref];
+    window.open(`https://wa.me/213675781689?text=${encodeURIComponent(msg)}`,'_blank');
+    setTimeout(()=>{closeModal();setTimeout(resetModal,500);},10000);
+  },1400);
+});
+
+function flash(id){
+  const el=document.getElementById(id);
+  el.style.borderColor='var(--coral)';
+  el.style.boxShadow='0 0 0 3px rgba(251,113,133,.15)';
+  el.focus();
+  setTimeout(()=>{el.style.borderColor='';el.style.boxShadow='';},2800);
+}
+function resetModal(){
+  modalForm.style.display='';
+  modalOk.classList.remove('show');
+  ['f-name','f-phone','f-notes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-wilaya').value='';
+  document.querySelectorAll('.svc-tile').forEach(t=>{
+    t.classList.remove('on');
+    t.querySelector('input').checked=false;
+  });
+}
+</script>
+</body>
+</html>
